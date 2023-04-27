@@ -1,3 +1,9 @@
 <template>
-  <h1>Main Page</h1>
+  <h1 class="text">index</h1>
 </template>
+
+<style scoped>
+.text {
+  font-family: "Bruno Ace", sans-serif;
+}
+</style>

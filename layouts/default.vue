@@ -1,6 +1,9 @@
 <template>
   <div>
-    <Loading v-if="isShow" />
+    <transition name="fade">
+      <Loading v-if="isShow" />
+    </transition>
+
     <!-- <h2>{{ randomString }}</h2> -->
   </div>
   <main>
@@ -26,7 +29,7 @@ export default {
     this.$nextTick(() => {
       setTimeout(() => {
         this.isShow = false;
-      }, 2000);
+      }, 3000);
     });
     setInterval(() => {
       this.randomString = this.generateRandomString();
@@ -52,5 +55,30 @@ export default {
 <style scoped>
 .sh-text {
   color: black;
+}
+
+/* 表示時の状態 */
+.fade-enter-from {
+  opacity: 0;
+}
+/* 表示時のアクティブ状態 */
+.fade-enter-active {
+  transition: all 0.5s;
+}
+/* 表示時の終了状態 */
+.fade-enter-to {
+  opacity: 1;
+}
+/* 非表示時の状態 */
+.fade-leave-from {
+  opacity: 1;
+}
+/* 非表示時のアクティブ状態 */
+.fade-leave-active {
+  transition: all 0.5s;
+}
+/* 非表示時の終了状態 */
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
