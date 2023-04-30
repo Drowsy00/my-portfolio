@@ -1,28 +1,32 @@
 <template>
   <div>
     <transition name="fade">
-      <Loading v-if="isShow" />
+      <LoadingComp v-if="isShow" />
     </transition>
-
-    <!-- <h2>{{ randomString }}</h2> -->
   </div>
   <main>
-    <nav>ここにナビゲーションバーを入れる</nav>
+    <HeaderComp @sidenavToggle="displaySidenav = !displaySidenav" />
+    <SidenavComp :show="displaySidenav" @close="displaySidenav = false" />
     <slot />
   </main>
 </template>
 
 <script>
-import Loading from "~/components/Loading.vue";
+import LoadingComp from "@/components/LoadingComp.vue";
+import HeaderComp from "@/components/HeaderComp.vue";
+import SidenavComp from "@/components/SidenavComp.vue";
 
 export default {
   component: {
-    Loading,
+    LoadingComp,
+    HeaderComp,
+    SidenavComp,
   },
   data() {
     return {
       isShow: true,
       randomString: "",
+      displaySidenav: false,
     };
   },
   mounted() {
@@ -52,9 +56,11 @@ export default {
 };
 </script>
 
-<style scoped>
-.sh-text {
-  color: black;
+<style>
+* {
+  margin: 0;
+  background: black;
+  color: #00ff00;
 }
 
 /* 表示時の状態 */

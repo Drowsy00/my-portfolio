@@ -7,7 +7,10 @@
         {{ randomString3 }}<br />
         {{ randomString2 }}<br />
         {{ randomString }}---
-        <span class="loading">LOADING...</span>
+        <span v-if="loadingIf == 'load'" class="loading"> ...LOADING... </span>
+        <span v-else-if="loadingIf == 'complete'" class="loading">
+          COMPLETE
+        </span>
         ---{{ randomString }}<br />
         {{ randomString3 }}<br />
         {{ randomString2 }}<br />
@@ -31,6 +34,7 @@ export default {
       randomString: "",
       randomString2: "",
       randomString3: "",
+      loadingIf: "load",
     };
   },
   mounted() {
@@ -38,6 +42,10 @@ export default {
       // this.randomShow = false;
       this.isShow = true;
     }, 300);
+
+    setTimeout(() => {
+      this.loadingIf = "complete";
+    }, 2200);
 
     setTimeout(() => {
       this.randomShow = false;
@@ -113,6 +121,7 @@ export default {
   font-size: 20px;
   color: #00ff00;
   font-family: "Titillium Web", sans-serif;
+  align-items: center;
 }
 
 .loading {
