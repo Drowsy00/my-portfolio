@@ -38,6 +38,7 @@ export default {
       if (this.command === "help") {
         this.terminalOutput.push(
           `portforio to Programmer CUI MODE`,
+          `${this.space}`,
           `commands `,
           `${this.space}`,
           `cat [file]:open txt or md files.`,
@@ -112,7 +113,39 @@ export default {
                 `${this.space}`
               );
             } else if (this.directory === "skills") {
-              this.terminalOutput.push(` skills.txt `);
+              this.terminalOutput.push(
+                `${this.space}`,
+                `HTML`,
+                `経験年数 : 2年 実務年数 : 1年`,
+                `${this.space}`,
+                `CSS`,
+                `経験年数 : 2年 実務年数 : 1年`,
+                `Javascript`,
+                `${this.space}`,
+                `経験年数 : 2年 実務年数 : 1年`,
+                `${this.space}`,
+                `python`,
+                `経験年数 : 1年`,
+                `${this.space}`,
+                `Java`,
+                `経験年数 : 1年`,
+                `${this.space}`,
+                `php`,
+                `経験年数 : 1年`,
+                `${this.space}`,
+                `Node.js`,
+                `経験年数 : 1年`,
+                `${this.space}`,
+                `vue.js`,
+                `経験年数 : 2年 実務年数 : 1年`,
+                `${this.space}`,
+                `Nuxt.js`,
+                `経験年数 : 1年`,
+                `${this.space}`,
+                `jquery`,
+                `経験年数 : 1年`,
+                `${this.space}`
+              );
             } else if (this.directory === "contact") {
             } else if (this.directory === "~") {
               this.terminalOutput.push(
@@ -121,6 +154,8 @@ export default {
             }
           }
         }
+      } else {
+        this.terminalOutput.push(`command not found: ${this.command}`);
       }
 
       this.command = "";
@@ -134,13 +169,12 @@ export default {
 .terminal-window {
   display: flex;
   flex-direction: column;
-  width: 80%;
-  height: 80%;
-  max-width: 800px;
-  max-height: 600px;
+  width: 100%;
+  height: 100%;
+  /* max-width: 800px;
+  max-height: 600px; */
   background-color: black;
   color: white;
-  font-family: monospace;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -188,5 +222,11 @@ export default {
 .prompt {
   color: #9eff6e;
   margin-right: 5px;
+}
+
+@media (max-width: 500px) {
+  .terminal-body {
+    font-size: 12px;
+  }
 }
 </style>
