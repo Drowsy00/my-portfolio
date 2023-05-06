@@ -8,7 +8,7 @@
     <div class="terminal-body" ref="terminalBody">
       <p v-for="(line, index) in terminalOutput" :key="index">{{ line }}</p>
       <form class="terminal-form" @submit.prevent="processCommand">
-        <span class="prompt">{{ prompt }}</span>
+        <span class="prompt">{{ prompt }} {{ directory }} {{ parsent }}</span>
         <input type="text" v-model="command" ref="commandInput" autofocus />
       </form>
     </div>
@@ -23,28 +23,103 @@ export default {
       terminalOutput: [],
       command: "",
       // prompt: "$drowsy@portforio",
-      prompt: "drowsy@portforio ~ %",
+      prompt: "drowsy@portforio",
+      directory: "~",
+      parsent: "%",
       currentDirectory: "/",
+      space: "　　　",
     };
   },
   methods: {
     processCommand() {
-      this.terminalOutput.push(`${this.prompt} ${this.command}`);
+      this.terminalOutput.push(
+        `${this.prompt} ${this.directory} ${this.parsent} ${this.command} `
+      );
       if (this.command === "help") {
-        this.terminalOutput.push(`${this.prompt} --hello`);
-      }
-      if (this.command.startsWith("cd ")) {
+        this.terminalOutput.push(
+          `portforio to Programmer CUI MODE`,
+          `commands `,
+          `${this.space}`,
+          `cat [file]:open txt or md files.`,
+          `cd [dir]:change directory.`,
+          `ls :list segments.`
+        );
+      } else if (this.command.startsWith("ls")) {
         const destination = this.command.split(" ")[1];
-        if (destination === "about") {
-          this.currentDirectory = "/about";
-        } else if (destination === "skills") {
-          this.currentDirectory = "/skills";
-        } else if (destination === "contact") {
-          this.currentDirectory = "/contact";
-        } else {
-          this.terminalOutput.push(
-            `${this.prompt} cd: ${destination}: No such directory`
-          );
+        if (this.directory === "about" || "skills" || "contact" || "~") {
+          if (this.command === "ls" || "ls ") {
+            if (this.directory === "about") {
+              this.terminalOutput.push(` about.txt `);
+            } else if (this.directory === "skills") {
+              this.terminalOutput.push(` skills.txt `);
+            } else if (this.directory === "contact") {
+            } else if (this.directory === "~") {
+              this.terminalOutput.push(
+                `about${this.space}skills${this.space}contact`
+              );
+            }
+          }
+        }
+      } else if (this.command.startsWith("cd")) {
+        const destination = this.command.split(" ")[1];
+        if (destination === "about" || "skills" || "contact") {
+          if (destination === "about") {
+            this.directory = "about";
+          } else if (destination === "skills") {
+            this.directory = "skills";
+          } else if (destination === "contact") {
+            this.directory = "contact";
+          } else if (this.command === "cd" || "cd ") {
+            this.directory = "~";
+          } else {
+            this.terminalOutput.push(
+              `${this.prompt} cd: ${destination}: No such directory`
+            );
+          }
+        }
+      } else if (this.command.startsWith("cat")) {
+        if (this.directory === "about" || "skills" || "contact" || "~") {
+          if (this.command === `cat ${this.directory}`) {
+            if (this.directory === "about") {
+              this.terminalOutput.push(
+                `${this.space}`,
+                `2017-2020`,
+                `IT業界に興味を持つ`,
+                `目的もなく高校に入学`,
+                `中学の頃から毎晩のように友人と通話しながらPCゲームをしてました。`,
+                `ゲームやPCのソフト、スマホアプリなどからプログラミングに興味を持ちました`,
+                `${this.space}`,
+                `2020`,
+                `ITの専門学校に入学`,
+                `ITの専門学校に入学し、プログラミングを本格的に学ぶ。`,
+                `HTML, CSS, Javascript, Python, PHPなどの基本的な学習をしました。`,
+                `${this.space}`,
+                `2021`,
+                `応用に挑戦`,
+                `友人と授業の中でwebアプリを開発しました。`,
+                `AIなどを使い1年間かけて開発し、いろいろなことを学びました。`,
+                `${this.space}`,
+                `2022`,
+                `IT業界に興味を持つ`,
+                `実務経験を積むためにITアルバイトに挑戦しました。`,
+                `デザイン会社にてホームページの修正、更新、新規追加などをしました。`,
+                `${this.space}`,
+                `2023`,
+                `いろいろなことに挑戦`,
+                "vue.jsやNuxt.jsを学習しました。",
+                "Flutterなどのモバイルアプリなども学習し始めました。",
+                "案件などを獲得するためにより実践的なものを学習しています。",
+                `${this.space}`
+              );
+            } else if (this.directory === "skills") {
+              this.terminalOutput.push(` skills.txt `);
+            } else if (this.directory === "contact") {
+            } else if (this.directory === "~") {
+              this.terminalOutput.push(
+                `about${this.space}skills${this.space}contact`
+              );
+            }
+          }
         }
       }
 
