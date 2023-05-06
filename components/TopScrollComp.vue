@@ -35,9 +35,9 @@ export default {
 
 <style scoped>
 .scroll-top-button {
-  position: relative;
+  position: absolute;
   top: 850%;
-  left: 36%;
+  left: 80%;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -48,6 +48,7 @@ export default {
   cursor: pointer;
   z-index: 999;
   display: flex;
+  opacity: 0.8;
 }
 
 .scroll-top-icon {

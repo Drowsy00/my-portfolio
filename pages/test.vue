@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <h1 class="page-title">--- ABOUT ---</h1>
+    <h1 class="page-title">--- TEST ---</h1>
     <div class="main-container">
       <div class="timeline-container">
         <div
@@ -16,7 +16,7 @@
           </div>
           <div class="timeline-body">
             <p v-for="(tlTitle, i) in entry.tlTitle" :key="i">
-              --- {{ tlTitle }} ---
+              {{ tlTitle }}
             </p>
             <p
               v-for="(paragraph, i) in entry.paragraphs"
@@ -72,11 +72,10 @@ export default {
         },
         {
           year: 2023,
-          tlTitle: ["いろいろなことに挑戦"],
+          tlTitle: ["さらにいろいろなことに挑戦"],
           paragraphs: [
             "vue.jsやNuxt.jsを学習しました。",
             "Flutterなどのモバイルアプリなども学習し始めました。",
-            "案件などを獲得するためにより実践的なものを学習しています。",
           ],
         },
       ],
@@ -135,7 +134,6 @@ export default {
   transform: translateX(-50%);
   width: 4px;
   background-color: #00ff00;
-  height: 870px;
 }
 
 .timeline-container .entry {
@@ -220,110 +218,5 @@ export default {
 
 .paragraph {
   font-size: 13px;
-}
-
-@media (max-width: 900px) {
-  .timeline-container {
-    width: calc(100% - 80px);
-    height: 100%;
-    margin: auto;
-  }
-
-  .timeline-container::after {
-    content: "";
-    display: block;
-    position: fixed;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: #00ff00;
-    height: 100%;
-  }
-
-  .timeline-container .entry {
-    width: calc(100% - 30px);
-    float: right;
-    padding: 20px;
-    clear: both;
-    text-align: left;
-    background-color: #1d1d1d;
-    border-radius: 10px;
-    margin-bottom: 100px;
-  }
-
-  .timeline-container .entry:not(:first-child) {
-    margin-top: -60px;
-  }
-
-  .timeline-container .entry .title {
-    font-size: 25px;
-    margin-bottom: 12px;
-    position: relative;
-    color: #fff;
-    background-color: #1d1d1d;
-  }
-
-  .timeline-container .entry .title::before {
-    content: "";
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border: 4px solid #00ff00;
-    background-color: #00ff00;
-    border-radius: 100%;
-    top: 50%;
-    transform: translate(8px, -50%);
-    /* right: -73px; */
-    z-index: 1;
-  }
-
-  .timeline-container .entry .title.big::before {
-    width: 24px;
-    height: 24px;
-    transform: translate(8px, -50%);
-  }
-
-  .timeline-container .entry .title:not(.big)::before {
-    right: auto;
-    left: -54px;
-  }
-
-  .timeline-container .entry .title:not(.big)::before {
-    transform: translate(-8px, -50%);
-  }
-
-  .timeline-container .entry .timeline-body {
-    color: #aaa;
-  }
-
-  .timeline-container .entry .timeline-body p {
-    line-height: 1.4em;
-    background-color: #1d1d1d;
-    text-align: left;
-  }
-
-  .timeline-container .entry:nth-child(2n) {
-    text-align: left;
-    float: right;
-  }
-
-  /* .timeline-container .entry:nth-child(2n) .title::before {
-    left: auto;
-    right: 380px;
-  } */
-
-  .timeline-container .entry:nth-child(2n) .timeline-body {
-    text-align: left;
-  }
-
-  .timeline-container .entry:nth-child(2n) {
-    float: right;
-  }
-
-  .paragraph {
-    font-size: 13px;
-  }
 }
 </style>

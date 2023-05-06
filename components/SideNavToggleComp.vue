@@ -37,9 +37,9 @@
 } */
 
 .menu-btn {
-  position: relative;
+  position: absolute;
   top: 950%;
-  left: 50%;
+  left: 80%;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -50,6 +50,7 @@
   line-height: 60px;
   cursor: pointer;
   z-index: 999;
+  opacity: 0.8;
 }
 
 .menu-btn__bar {

@@ -20,6 +20,9 @@
           <li class="nav-item">
             <NuxtLink to="/contact"><span>04</span>CONTACT</NuxtLink>
           </li>
+          <li class="nav-item">
+            <NuxtLink to="/cui"><span>05</span>CUI mode</NuxtLink>
+          </li>
         </ul>
         <div drawer-toggle-container>
           <div class="drawer-toggle" role="button" @click="$emit('close')">

@@ -14,7 +14,14 @@
     "nuxt": "^3.4.2"
   },
   "dependencies": {
+    "@mdi/font": "^7.2.96",
     "baffle": "^0.3.6",
-    "vue-shuffle-text": "^0.1.0"
+    "gsap": "^3.11.5",
+    "hzqing-vue-timeline": "^1.0.3",
+    "vue-carousel": "^0.18.0",
+    "vue-shuffle-text": "^0.1.0",
+    "vue-slick-carousel": "^1.0.6",
+    "vue3-carousel": "^0.3.1",
+    "vuetify": "^3.2.2"
   }
 }

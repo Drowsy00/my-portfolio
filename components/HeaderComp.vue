@@ -29,6 +29,10 @@
             <span><nuxt-link to="/contact">CONTACT</nuxt-link></span>
             <!-- <span><RandomText /></span> -->
           </li>
+          <li class="nav-item">
+            <span><nuxt-link to="/cui">CUI MODE</nuxt-link></span>
+            <!-- <span><RandomText /></span> -->
+          </li>
         </ul>
       </div>
     </header>

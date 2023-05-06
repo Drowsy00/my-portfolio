@@ -36,4 +36,17 @@ export default {
       ],
     },
   },
+  typescript: {
+    shim: false,
+  },
+  ssr: false,
+  css: ["vuetify/styles", "@mdi/font/css/materialdesignicons.css"],
+  build: {
+    transpile: ["vuetify"],
+  },
+  vite: {
+    define: {
+      "process.env.DEBUG": false,
+    },
+  },
 };
