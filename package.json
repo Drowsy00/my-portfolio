@@ -19,6 +19,7 @@
     "gsap": "^3.11.5",
     "hzqing-vue-timeline": "^1.0.3",
     "vue-carousel": "^0.18.0",
+    "vue-draggable-resizable": "^2.3.0",
     "vue-shuffle-text": "^0.1.0",
     "vue-slick-carousel": "^1.0.6",
     "vue3-carousel": "^0.3.1",

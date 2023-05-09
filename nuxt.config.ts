@@ -33,20 +33,12 @@ export default {
           href: "https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap",
           crossorigin: "",
         },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap",
+          crossorigin: "",
+        },
       ],
-    },
-  },
-  typescript: {
-    shim: false,
-  },
-  ssr: false,
-  css: ["vuetify/styles", "@mdi/font/css/materialdesignicons.css"],
-  build: {
-    transpile: ["vuetify"],
-  },
-  vite: {
-    define: {
-      "process.env.DEBUG": false,
     },
   },
 };

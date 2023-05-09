@@ -1,21 +1,32 @@
 <template>
-  <div class="terminal-window">
+  <div class="terminal-window" @click="onClickFocus()">
     <div class="terminal-header">
       <span class="red-dot"></span>
       <span class="yellow-dot"></span>
       <span class="green-dot"></span>
     </div>
+
     <div class="terminal-body" ref="terminalBody">
+      <p>Drowsy's Port Forio CUI MODE</p>
+      <p>LOADED</p>
+      <p>[ |||||||||||||||||||||||||||||||||||||||||||||||||||||||| ]</p>
       <p v-for="(line, index) in terminalOutput" :key="index">{{ line }}</p>
       <form class="terminal-form" @submit.prevent="processCommand">
         <span class="prompt">{{ prompt }} {{ directory }} {{ parsent }}</span>
-        <input type="text" v-model="command" ref="commandInput" autofocus />
+        <input
+          type="text"
+          class="command-input"
+          v-model="command"
+          ref="commandInput"
+          autofocus
+        />
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import aboutVue from "./about.vue";
 export default {
   name: "TerminalWindow",
   data() {
@@ -31,6 +42,9 @@ export default {
     };
   },
   methods: {
+    onClickFocus() {
+      this.$refs.commandInput.focus();
+    },
     processCommand() {
       this.terminalOutput.push(
         `${this.prompt} ${this.directory} ${this.parsent} ${this.command} `
@@ -45,117 +59,250 @@ export default {
           `cd [dir]:change directory.`,
           `ls :list segments.`
         );
-      } else if (this.command.startsWith("ls")) {
+      } else if (
+        this.command.startsWith("ls ") ||
+        this.command.startsWith("ls")
+      ) {
         const destination = this.command.split(" ")[1];
         if (this.directory === "about" || "skills" || "contact" || "~") {
           if (this.command === "ls" || "ls ") {
             if (this.directory === "about") {
-              this.terminalOutput.push(` about.txt `);
+              if (this.command === "ls" || this.command === "ls ") {
+                this.terminalOutput.push(` about.txt `);
+              } else if (this.command.startsWith("ls ")) {
+                this.terminalOutput.push(
+                  `ls: ${this.command}: No such file or directory`
+                );
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
             } else if (this.directory === "skills") {
-              this.terminalOutput.push(` skills.txt `);
+              if (this.command === "ls" || this.command === "ls ") {
+                this.terminalOutput.push(` skills.txt `);
+              } else if (this.command.startsWith("ls ")) {
+                this.terminalOutput.push(
+                  `ls: ${this.command}: No such file or directory`
+                );
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
             } else if (this.directory === "contact") {
-            } else if (this.directory === "~") {
-              this.terminalOutput.push(
-                `about${this.space}skills${this.space}contact`
-              );
+              if (this.command === "ls" || this.command === "ls ") {
+                this.terminalOutput.push(` contact.txt `);
+              } else if (this.command.startsWith("ls ")) {
+                this.terminalOutput.push(
+                  `ls: ${this.command}: No such file or directory`
+                );
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
+            } else {
+              if (this.command === "ls" || this.command === "ls ") {
+                this.terminalOutput.push(
+                  `about${this.space}skills${this.space}contact`
+                );
+              } else if (this.command.startsWith("ls ")) {
+                this.terminalOutput.push(
+                  `ls: ${destination}: No such file or directory`
+                );
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
             }
           }
         }
-      } else if (this.command.startsWith("cd")) {
+      } else if (
+        this.command.startsWith("cd") ||
+        this.command.startsWith("cd ")
+      ) {
         const destination = this.command.split(" ")[1];
-        if (destination === "about" || "skills" || "contact") {
-          if (destination === "about") {
-            this.directory = "about";
-          } else if (destination === "skills") {
-            this.directory = "skills";
-          } else if (destination === "contact") {
-            this.directory = "contact";
-          } else if (this.command === "cd" || "cd ") {
-            this.directory = "~";
-          } else {
-            this.terminalOutput.push(
-              `${this.prompt} cd: ${destination}: No such directory`
-            );
-          }
-        }
-      } else if (this.command.startsWith("cat")) {
         if (this.directory === "about" || "skills" || "contact" || "~") {
-          if (this.command === `cat ${this.directory}`) {
-            if (this.directory === "about") {
+          if (destination === "about") {
+            if (this.directory === "~") {
+              this.directory = "about";
+            } else {
               this.terminalOutput.push(
-                `${this.space}`,
-                `2017-2020`,
-                `IT業界に興味を持つ`,
-                `目的もなく高校に入学`,
-                `中学の頃から毎晩のように友人と通話しながらPCゲームをしてました。`,
-                `ゲームやPCのソフト、スマホアプリなどからプログラミングに興味を持ちました`,
-                `${this.space}`,
-                `2020`,
-                `ITの専門学校に入学`,
-                `ITの専門学校に入学し、プログラミングを本格的に学ぶ。`,
-                `HTML, CSS, Javascript, Python, PHPなどの基本的な学習をしました。`,
-                `${this.space}`,
-                `2021`,
-                `応用に挑戦`,
-                `友人と授業の中でwebアプリを開発しました。`,
-                `AIなどを使い1年間かけて開発し、いろいろなことを学びました。`,
-                `${this.space}`,
-                `2022`,
-                `IT業界に興味を持つ`,
-                `実務経験を積むためにITアルバイトに挑戦しました。`,
-                `デザイン会社にてホームページの修正、更新、新規追加などをしました。`,
-                `${this.space}`,
-                `2023`,
-                `いろいろなことに挑戦`,
-                "vue.jsやNuxt.jsを学習しました。",
-                "Flutterなどのモバイルアプリなども学習し始めました。",
-                "案件などを獲得するためにより実践的なものを学習しています。",
-                `${this.space}`
+                `cd: no such directory : ${destination};`
               );
-            } else if (this.directory === "skills") {
+            }
+          } else if (destination === "skills") {
+            if (this.directory === "~") {
+              this.directory = "skills";
+            } else {
               this.terminalOutput.push(
-                `${this.space}`,
-                `HTML`,
-                `経験年数 : 2年 実務年数 : 1年`,
-                `${this.space}`,
-                `CSS`,
-                `経験年数 : 2年 実務年数 : 1年`,
-                `Javascript`,
-                `${this.space}`,
-                `経験年数 : 2年 実務年数 : 1年`,
-                `${this.space}`,
-                `python`,
-                `経験年数 : 1年`,
-                `${this.space}`,
-                `Java`,
-                `経験年数 : 1年`,
-                `${this.space}`,
-                `php`,
-                `経験年数 : 1年`,
-                `${this.space}`,
-                `Node.js`,
-                `経験年数 : 1年`,
-                `${this.space}`,
-                `vue.js`,
-                `経験年数 : 2年 実務年数 : 1年`,
-                `${this.space}`,
-                `Nuxt.js`,
-                `経験年数 : 1年`,
-                `${this.space}`,
-                `jquery`,
-                `経験年数 : 1年`,
-                `${this.space}`
+                `cd: no such directory : ${destination};`
               );
-            } else if (this.directory === "contact") {
-            } else if (this.directory === "~") {
+            }
+          } else if (destination === "contact") {
+            if (this.directory === "~") {
+              this.directory = "contact";
+            } else {
               this.terminalOutput.push(
-                `about${this.space}skills${this.space}contact`
+                `cd: no such directory : ${destination};`
               );
+            }
+          } else {
+            if (this.command.startsWith("cd ")) {
+              if (this.command === "cd ") {
+                this.directory = "~";
+              } else {
+                this.terminalOutput.push(
+                  `cd: no such directory : ${destination};`
+                );
+              }
+            } else if (this.command.startsWith("cd")) {
+              if (this.command === "cd") {
+                this.directory = "~";
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
             }
           }
         }
-      } else {
-        this.terminalOutput.push(`command not found: ${this.command}`);
+      } else if (
+        this.command.startsWith("cat") ||
+        this.command.startsWith("cat ")
+      ) {
+        const destination = this.command.split(" ")[1];
+        if (this.directory === "about") {
+          if (destination === "about.txt") {
+            this.terminalOutput.push(
+              `${this.space}`,
+              `2017-2020`,
+              `IT業界に興味を持つ`,
+              `目的もなく高校に入学`,
+              `中学の頃から毎晩のように友人と通話しながらPCゲームをしてました。`,
+              `ゲームやPCのソフト、スマホアプリなどからプログラミングに興味を持ちました`,
+              `${this.space}`,
+              `2020`,
+              `ITの専門学校に入学`,
+              `ITの専門学校に入学し、プログラミングを本格的に学ぶ。`,
+              `HTML, CSS, Javascript, Python, PHPなどの基本的な学習をしました。`,
+              `${this.space}`,
+              `2021`,
+              `応用に挑戦`,
+              `友人と授業の中でwebアプリを開発しました。`,
+              `AIなどを使い1年間かけて開発し、いろいろなことを学びました。`,
+              `${this.space}`,
+              `2022`,
+              `IT業界に興味を持つ`,
+              `実務経験を積むためにITアルバイトに挑戦しました。`,
+              `デザイン会社にてホームページの修正、更新、新規追加などをしました。`,
+              `${this.space}`,
+              `2023`,
+              `いろいろなことに挑戦`,
+              "vue.jsやNuxt.jsを学習しました。",
+              "Flutterなどのモバイルアプリなども学習し始めました。",
+              "案件などを獲得するためにより実践的なものを学習しています。",
+              `${this.space}`
+            );
+          } else {
+            if (this.command.startsWith("cat ")) {
+              if (this.command === "cat ") {
+              } else {
+                this.terminalOutput.push(
+                  `cat: no such directory : ${destination};`
+                );
+              }
+            } else if (this.command.startsWith("cat")) {
+              if (this.command === "cat") {
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
+            }
+          }
+        } else if (this.directory === "skills") {
+          if (destination === "skills.txt") {
+            this.terminalOutput.push(
+              `${this.space}`,
+              `HTML`,
+              `経験年数 : 2年 実務年数 : 1年`,
+              `${this.space}`,
+              `CSS`,
+              `経験年数 : 2年 実務年数 : 1年`,
+              `Javascript`,
+              `${this.space}`,
+              `経験年数 : 2年 実務年数 : 1年`,
+              `${this.space}`,
+              `python`,
+              `経験年数 : 1年`,
+              `${this.space}`,
+              `Java`,
+              `経験年数 : 1年`,
+              `${this.space}`,
+              `php`,
+              `経験年数 : 1年`,
+              `${this.space}`,
+              `Node.js`,
+              `経験年数 : 1年`,
+              `${this.space}`,
+              `vue.js`,
+              `経験年数 : 2年 実務年数 : 1年`,
+              `${this.space}`,
+              `Nuxt.js`,
+              `経験年数 : 1年`,
+              `${this.space}`,
+              `jquery`,
+              `経験年数 : 1年`,
+              `${this.space}`
+            );
+          } else {
+            if (this.command.startsWith("cat ")) {
+              if (this.command === "cat ") {
+              } else {
+                this.terminalOutput.push(
+                  `cat: no such directory : ${destination};`
+                );
+              }
+            } else if (this.command.startsWith("cat")) {
+              if (this.command === "cat") {
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
+            }
+          }
+        } else if (this.directory === "contact") {
+          if (destination === "contact.txt") {
+            this.terminalOutput.push(
+              `${this.space}`,
+              `https://github.com/Drowsy00`,
+              `${this.space}`
+            );
+          } else {
+            if (this.command.startsWith("cat ")) {
+              if (this.command === "cat ") {
+              } else {
+                this.terminalOutput.push(
+                  `cat: no such directory : ${destination};`
+                );
+              }
+            } else if (this.command.startsWith("cat")) {
+              if (this.command === "cat") {
+              } else {
+                this.terminalOutput.push(`command not found: ${this.command}`);
+              }
+            }
+          }
+        } else if (this.directory === "~") {
+          if (this.command.startsWith("cat ")) {
+            if (this.command === "cat ") {
+            } else {
+              this.terminalOutput.push(
+                `cat: no such directory : ${destination};`
+              );
+            }
+          } else if (this.command.startsWith("cat")) {
+            if (this.command === "cat") {
+            } else {
+              this.terminalOutput.push(`command not found: ${this.command}`);
+            }
+          }
+        }
+      } else if (this.command !== "") {
+        this.terminalOutput.push(
+          `command not found: ${this.command}`,
+          `Use 'help' to see the command list.`
+        );
       }
 
       this.command = "";
@@ -166,11 +313,14 @@ export default {
 </script>
 
 <style scoped>
+* {
+  font-family: Rubik;
+}
 .terminal-window {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   /* max-width: 800px;
   max-height: 600px; */
   background-color: black;
@@ -185,7 +335,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
   height: 30px;
-  padding-left: 10px;
+  padding-left: 20px;
 }
 
 .terminal-header span {
@@ -216,14 +366,23 @@ export default {
 .terminal-form {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: 12px;
 }
 
 .prompt {
-  color: #9eff6e;
+  color: #00ff00;
   margin-right: 5px;
+  /* padding-bottom: 12px; */
 }
 
+.command-input {
+  border: none;
+}
+
+input[type="text"]:focus {
+  border: none;
+  outline: 0;
+}
 @media (max-width: 500px) {
   .terminal-body {
     font-size: 12px;
