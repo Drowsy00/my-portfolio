@@ -1,29 +1,142 @@
 <template>
   <div class="page-container">
-    <h1 class="page-title">--- ABOUT ---</h1>
+    <h1 class="page-title" ref="element1">
+      <span v-if="textTitle">--- ABOUT ---</span>
+      <span v-if="isTitle">{{ randomString }}</span>
+    </h1>
     <div class="main-container">
       <div class="timeline-container">
+        <!-- 2017-2020 -->
         <div
-          v-for="(entry, index) in entries"
-          :key="index"
           class="entry"
           :class="{ 'entry-left': index % 2 !== 0 }"
+          ref="element2"
         >
-          <!-- <div class="title" :class="{ big: entry.year === 2013 }"> -->
           <div class="title">
-            {{ entry.year }}
+            <span v-if="isYear1">{{ randomStringYear }}</span>
+            <span v-if="textYear1">{{ entries[0].year }}</span>
             <div class="title-icon"></div>
           </div>
           <div class="timeline-body">
-            <p v-for="(tlTitle, i) in entry.tlTitle" :key="i">
-              --- {{ tlTitle }} ---
+            <p>
+              <span v-if="isYear1">{{ randomString }}</span>
+              <span v-if="textYear1">--- {{ entries[0].tlTitle }} ---</span>
             </p>
-            <p
-              v-for="(paragraph, i) in entry.paragraphs"
-              :key="i"
-              class="paragraph"
-            >
-              {{ paragraph }}
+            <br />
+            <p class="paragraph">
+              <span v-if="isTlbody1">{{ randomString40 }}</span>
+              <span v-if="textTlbody1">{{ entries[0].paragraphs[0] }}</span>
+              <br />
+              <span v-if="isTlbody1">{{ randomString70 }}</span>
+              <span v-if="textTlbody1">{{ entries[0].paragraphs[1] }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 2020 -->
+        <div
+          class="entry"
+          :class="{ 'entry-left': index % 2 !== 0 }"
+          ref="element3"
+        >
+          <div class="title">
+            <span v-if="isYear2">{{ randomStringYear }}</span>
+            <span v-if="textYear2">{{ entries[1].year }}</span>
+            <div class="title-icon"></div>
+          </div>
+          <div class="timeline-body">
+            <p>
+              <span v-if="isYear2">{{ randomString }}</span>
+              <span v-if="textYear2">--- {{ entries[1].tlTitle }} ---</span>
+            </p>
+            <br />
+            <p class="paragraph">
+              <span v-if="isTlbody2">{{ randomString30 }}</span>
+              <span v-if="textTlbody2">{{ entries[1].paragraphs[0] }}</span>
+              <br />
+              <span v-if="isTlbody2">{{ randomString40 }}</span>
+              <span v-if="textTlbody2">{{ entries[1].paragraphs[1] }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 2021 -->
+        <div
+          class="entry"
+          :class="{ 'entry-left': index % 2 !== 0 }"
+          ref="element4"
+        >
+          <div class="title">
+            <span v-if="isYear3">{{ randomStringYear }}</span>
+            <span v-if="textYear3">{{ entries[2].year }}</span>
+            <div class="title-icon"></div>
+          </div>
+          <div class="timeline-body">
+            <p>
+              <span v-if="isYear3">{{ randomString }}</span>
+              <span v-if="textYear3">--- {{ entries[2].tlTitle }} ---</span>
+            </p>
+            <br />
+            <p class="paragraph">
+              <span v-if="isTlbody3">{{ randomString30 }}</span>
+              <span v-if="textTlbody3">{{ entries[2].paragraphs[0] }}</span>
+              <br />
+              <span v-if="isTlbody3">{{ randomString30 }}</span>
+              <span v-if="textTlbody3">{{ entries[2].paragraphs[1] }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 2022 -->
+        <div
+          class="entry"
+          :class="{ 'entry-left': index % 2 !== 0 }"
+          ref="element5"
+        >
+          <div class="title">
+            <span v-if="isYear4">{{ randomStringYear }}</span>
+            <span v-if="textYear4">{{ entries[3].year }}</span>
+            <div class="title-icon"></div>
+          </div>
+          <div class="timeline-body">
+            <p>
+              <span v-if="isYear4">{{ randomString }}</span>
+              <span v-if="textYear4">--- {{ entries[3].tlTitle }} ---</span>
+            </p>
+            <br />
+            <p class="paragraph">
+              <span v-if="isTlbody4">{{ randomString30 }}</span>
+              <span v-if="textTlbody4">{{ entries[3].paragraphs[0] }}</span>
+              <br />
+              <span v-if="isTlbody4">{{ randomString30 }}</span>
+              <span v-if="textTlbody4">{{ entries[3].paragraphs[1] }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- 2023 -->
+        <div
+          class="entry"
+          :class="{ 'entry-left': index % 2 !== 0 }"
+          ref="element6"
+        >
+          <div class="title">
+            <span v-if="isYear5">{{ randomStringYear }}</span>
+            <span v-if="textYear5">{{ entries[4].year }}</span>
+            <div class="title-icon"></div>
+          </div>
+          <div class="timeline-body">
+            <p>
+              <span v-if="isYear5">{{ randomString }}</span>
+              <span v-if="textYear5">--- {{ entries[4].tlTitle }} ---</span>
+            </p>
+            <br />
+            <p class="paragraph">
+              <span v-if="isTlbody5">{{ randomString30 }}</span>
+              <span v-if="textTlbody5">{{ entries[4].paragraphs[0] }}</span>
+              <br />
+              <span v-if="isTlbody5">{{ randomString30 }}</span>
+              <span v-if="textTlbody5">{{ entries[4].paragraphs[1] }}</span>
             </p>
           </div>
         </div>
@@ -36,19 +149,51 @@
 export default {
   data() {
     return {
+      randomString: "",
+      randomString30: "",
+      randomString40: "",
+      randomString70: "",
+      randomStringYear: "",
+      textTitle: false,
+      isTitle: false,
+
+      textYear1: false,
+      isYear1: false,
+      textTlbody1: false,
+      isTlbody1: false,
+
+      textYear2: false,
+      isYear2: false,
+      textTlbody2: false,
+      isTlbody2: false,
+
+      textYear3: false,
+      isYear3: false,
+      textTlbody3: false,
+      isTlbody3: false,
+
+      textYear4: false,
+      isYear4: false,
+      textTlbody4: false,
+      isTlbody4: false,
+
+      textYear5: false,
+      isYear5: false,
+      textTlbody5: false,
+      isTlbody5: false,
+
       entries: [
         {
           year: "2017-2020",
-          tlTitle: ["IT業界に興味を持つ"],
+          tlTitle: "IT業界に興味を持つ",
           paragraphs: [
-            `目的もなく高校に入学`,
-            `中学の頃から毎晩のように友人と通話しながらPCゲームをしてました。`,
-            `ゲームやPCのソフト、スマホアプリなどからプログラミングに興味を持ちました。`,
+            `高校に入学。中学の頃から毎晩のように友人と通話しながらPCゲームをしてました。`,
+            `父親がロボットを作ってくれたことや、ゲーム、スマホアプリなどからプログラミングに興味を持ちました。`,
           ],
         },
         {
           year: 2020,
-          tlTitle: ["ITの専門学校に入学"],
+          tlTitle: "ITの専門学校に入学",
           paragraphs: [
             `ITの専門学校に入学し、プログラミングを本格的に学ぶ。`,
             `HTML, CSS, Javascript, Python, PHPなどの基本的な学習をしました。`,
@@ -56,7 +201,7 @@ export default {
         },
         {
           year: 2021,
-          tlTitle: ["応用に挑戦"],
+          tlTitle: "応用に挑戦",
           paragraphs: [
             `友人と授業の中でwebアプリを開発しました。`,
             `AIなどを使い1年間かけて開発し、いろいろなことを学びました。`,
@@ -64,7 +209,7 @@ export default {
         },
         {
           year: 2022,
-          tlTitle: ["ITアルバイトに挑戦"],
+          tlTitle: "ITアルバイトに挑戦",
           paragraphs: [
             `実務経験を積むためにITアルバイトに挑戦しました。`,
             `デザイン会社にてホームページの修正、更新、新規追加などをしました。`,
@@ -72,15 +217,259 @@ export default {
         },
         {
           year: 2023,
-          tlTitle: ["いろいろなことに挑戦"],
+          tlTitle: "いろいろなことに挑戦",
           paragraphs: [
             "vue.jsやNuxt.jsを学習しました。",
             "Flutterなどのモバイルアプリなども学習し始めました。",
-            "案件などを獲得するためにより実践的なものを学習しています。",
           ],
         },
       ],
     };
+  },
+  mounted() {
+    const observer1 = new IntersectionObserver(
+      this.handleIntersection1.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer1.observe(this.$refs.element1);
+
+    const observer2 = new IntersectionObserver(
+      this.handleIntersection2.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer2.observe(this.$refs.element2);
+
+    const observer3 = new IntersectionObserver(
+      this.handleIntersection3.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer3.observe(this.$refs.element3);
+
+    const observer4 = new IntersectionObserver(
+      this.handleIntersection4.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer4.observe(this.$refs.element4);
+
+    const observer5 = new IntersectionObserver(
+      this.handleIntersection5.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer5.observe(this.$refs.element5);
+
+    const observer6 = new IntersectionObserver(
+      this.handleIntersection6.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer6.observe(this.$refs.element6);
+
+    setInterval(() => {
+      this.randomString = this.generateRandomString();
+      this.randomString30 = this.generateRandomString30();
+      this.randomString40 = this.generateRandomString40();
+      this.randomString70 = this.generateRandomString70();
+      this.randomStringYear = this.generateRandomStringYear();
+    }, 90);
+  },
+  methods: {
+    generateRandomString() {
+      let length = 15;
+      let result = "";
+      let characters = "-010101";
+      let charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    generateRandomString30() {
+      let length = 30;
+      let result = "";
+      let characters = "-010101";
+      let charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    generateRandomString40() {
+      let length = 40;
+      let result = "";
+      let characters = "-010101";
+      let charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    generateRandomString70() {
+      let length = 70;
+      let result = "";
+      let characters = "-010101";
+      let charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    generateRandomStringYear() {
+      let length = 5;
+      let result = "";
+      let characters = "-010101";
+      let charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+
+    handleIntersection1(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.isTitle = true;
+          this.textTitle = false;
+          setTimeout(() => {
+            this.isTitle = false;
+            this.textTitle = true;
+          }, 700);
+        }
+      });
+    },
+    handleIntersection2(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.generateRandomString40();
+          this.generateRandomString70();
+          this.generateRandomStringYear();
+          this.isYear1 = true;
+          this.isTlbody1 = true;
+          this.textYear1 = false;
+          this.textTlbody1 = false;
+          setTimeout(() => {
+            this.isYear1 = false;
+            this.isTlbody1 = false;
+            this.textYear1 = true;
+            this.textTlbody1 = true;
+          }, 700);
+        }
+      });
+    },
+    handleIntersection3(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.generateRandomString30();
+          this.generateRandomString40();
+          this.generateRandomStringYear();
+          this.isYear2 = true;
+          this.isTlbody2 = true;
+          this.textYear2 = false;
+          this.textTlbody2 = false;
+          setTimeout(() => {
+            this.isYear2 = false;
+            this.isTlbody2 = false;
+            this.textYear2 = true;
+            this.textTlbody2 = true;
+          }, 700);
+        }
+      });
+    },
+    handleIntersection4(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.generateRandomString30();
+          this.generateRandomString30();
+          this.generateRandomStringYear();
+          this.isYear3 = true;
+          this.isTlbody3 = true;
+          this.textYear3 = false;
+          this.textTlbody3 = false;
+          setTimeout(() => {
+            this.isYear3 = false;
+            this.isTlbody3 = false;
+            this.textYear3 = true;
+            this.textTlbody3 = true;
+          }, 700);
+        }
+      });
+    },
+    handleIntersection5(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.generateRandomString30();
+          this.generateRandomString30();
+          this.generateRandomStringYear();
+          this.isYear4 = true;
+          this.isTlbody4 = true;
+          this.textYear4 = false;
+          this.textTlbody4 = false;
+          setTimeout(() => {
+            this.isYear4 = false;
+            this.isTlbody4 = false;
+            this.textYear4 = true;
+            this.textTlbody4 = true;
+          }, 700);
+        }
+      });
+    },
+    handleIntersection6(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.generateRandomString30();
+          this.generateRandomString30();
+          this.generateRandomStringYear();
+          this.isYear5 = true;
+          this.isTlbody5 = true;
+          this.textYear5 = false;
+          this.textTlbody5 = false;
+          setTimeout(() => {
+            this.isYear5 = false;
+            this.isTlbody5 = false;
+            this.textYear5 = true;
+            this.textTlbody5 = true;
+          }, 700);
+        }
+      });
+    },
   },
 };
 </script>
@@ -100,230 +489,28 @@ export default {
 
 .main-container {
   margin-top: 50px;
-  display: flex;
+  text-align: center;
 }
-
-/* .main-container::after {
-  content: "";
-  display: block;
-  position: fixed;
-  position: absolute;
-  top: 0px;
-  left: 50%;
-  bottom: 0px;
-  transform: translateX(-50%);
-  width: 4px;
-  background-color: #00ff00;
-} */
 
 .timeline-container {
-  width: calc(100% - 80px);
-  max-width: 800px;
-  height: 100%;
-  margin: auto;
-  position: relative;
+  text-align: left;
 }
 
-.timeline-container::after {
-  content: "";
-  display: block;
-  position: fixed;
-  position: absolute;
-  top: 0px;
-  left: 50%;
-  bottom: 0px;
-  transform: translateX(-50%);
-  width: 4px;
-  background-color: #00ff00;
-  height: 870px;
+.entry {
+  display: flex;
+  margin-bottom: 50px;
+  margin-right: 5%;
+  margin-left: 5%;
 }
-
-.timeline-container .entry {
-  width: calc(50% - 80px);
-  float: left;
-  padding: 20px;
-  clear: both;
+.title {
   text-align: right;
-  background-color: #1d1d1d;
-  border-radius: 10px;
-  margin-bottom: 30px;
+  margin-right: 10%;
+  /* width: 300px; */
+  width: calc(50% - 100px);
 }
 
-.timeline-container .entry:not(:first-child) {
-  margin-top: -60px;
-}
-
-.timeline-container .entry .title {
-  font-size: 32px;
-  margin-bottom: 12px;
-  position: relative;
-  color: #fff;
-  background-color: #1d1d1d;
-}
-
-.timeline-container .entry .title::before {
-  content: "";
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  border: 4px solid #00ff00;
-  background-color: #00ff00;
-  border-radius: 100%;
-  top: 50%;
-  transform: translate(8px, -50%);
-  /* right: -73px; */
-  z-index: 1;
-}
-
-.timeline-container .entry .title.big::before {
-  width: 24px;
-  height: 24px;
-  transform: translate(8px, -50%);
-}
-
-.timeline-container .entry .title:not(.big)::before {
-  right: auto;
-  left: 376px;
-}
-
-.timeline-container .entry .title:not(.big)::before {
-  transform: translate(-8px, -50%);
-}
-
-.timeline-container .entry .timeline-body {
-  color: #aaa;
-}
-
-.timeline-container .entry .timeline-body p {
-  line-height: 1.4em;
-  background-color: #1d1d1d;
-  text-align: left;
-}
-
-.timeline-container .entry:nth-child(2n) {
-  text-align: left;
-  float: right;
-}
-
-.timeline-container .entry:nth-child(2n) .title::before {
-  left: auto;
-  right: 360px;
-}
-
-.timeline-container .entry:nth-child(2n) .timeline-body {
-  text-align: left;
-}
-
-.timeline-container .entry:nth-child(2n) {
-  float: right;
-}
-
-.paragraph {
-  font-size: 13px;
-}
-
-@media (max-width: 900px) {
-  .timeline-container {
-    width: calc(100% - 80px);
-    height: 100%;
-    margin: auto;
-  }
-
-  .timeline-container::after {
-    content: "";
-    display: block;
-    position: fixed;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 4px;
-    background-color: #00ff00;
-    height: 100%;
-  }
-
-  .timeline-container .entry {
-    width: calc(100% - 30px);
-    float: right;
-    padding: 20px;
-    clear: both;
-    text-align: left;
-    background-color: #1d1d1d;
-    border-radius: 10px;
-    margin-bottom: 100px;
-  }
-
-  .timeline-container .entry:not(:first-child) {
-    margin-top: -60px;
-  }
-
-  .timeline-container .entry .title {
-    font-size: 25px;
-    margin-bottom: 12px;
-    position: relative;
-    color: #fff;
-    background-color: #1d1d1d;
-  }
-
-  .timeline-container .entry .title::before {
-    content: "";
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    border: 4px solid #00ff00;
-    background-color: #00ff00;
-    border-radius: 100%;
-    top: 50%;
-    transform: translate(8px, -50%);
-    /* right: -73px; */
-    z-index: 1;
-  }
-
-  .timeline-container .entry .title.big::before {
-    width: 24px;
-    height: 24px;
-    transform: translate(8px, -50%);
-  }
-
-  .timeline-container .entry .title:not(.big)::before {
-    right: auto;
-    left: -54px;
-  }
-
-  .timeline-container .entry .title:not(.big)::before {
-    transform: translate(-8px, -50%);
-  }
-
-  .timeline-container .entry .timeline-body {
-    color: #aaa;
-  }
-
-  .timeline-container .entry .timeline-body p {
-    line-height: 1.4em;
-    background-color: #1d1d1d;
-    text-align: left;
-  }
-
-  .timeline-container .entry:nth-child(2n) {
-    text-align: left;
-    float: right;
-  }
-
-  /* .timeline-container .entry:nth-child(2n) .title::before {
-    left: auto;
-    right: 380px;
-  } */
-
-  .timeline-container .entry:nth-child(2n) .timeline-body {
-    text-align: left;
-  }
-
-  .timeline-container .entry:nth-child(2n) {
-    float: right;
-  }
-
-  .paragraph {
-    font-size: 13px;
-  }
+.timeline-body {
+  /* width: 80%; */
+  width: calc(80% - 10px);
 }
 </style>

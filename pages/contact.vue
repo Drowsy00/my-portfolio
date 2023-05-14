@@ -16,7 +16,6 @@ export default {
       isVisible: false,
     };
   },
-
   mounted() {
     const options = {
       threshold: 0.5, // 要素が50％以上画面内に入ったらコールバックを実行

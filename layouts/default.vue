@@ -8,6 +8,7 @@
     <HeaderComp @sidenavToggle="displaySidenav = !displaySidenav" />
     <SidenavComp :show="displaySidenav" @close="displaySidenav = false" />
     <slot />
+    <FooterComp />
   </main>
 </template>
 
@@ -15,12 +16,14 @@
 import LoadingComp from "@/components/LoadingComp.vue";
 import HeaderComp from "@/components/HeaderComp.vue";
 import SidenavComp from "@/components/SidenavComp.vue";
+import FooterComp from "@/components/FooterComp.vue";
 
 export default {
   component: {
     LoadingComp,
     HeaderComp,
     SidenavComp,
+    FooterComp,
   },
   data() {
     return {

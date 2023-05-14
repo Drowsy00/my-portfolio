@@ -1,6 +1,9 @@
 <template>
   <div class="page-container">
-    <h1 class="page-title">--- SKILLS ---</h1>
+    <h1 class="page-title" ref="element1">
+      <span v-if="textTitle">--- SKILLS ---</span>
+      <span v-if="isTitle">{{ randomString }}</span>
+    </h1>
 
     <div class="main-container">
       <Carousel
@@ -9,10 +12,7 @@
         :transition="500"
         :breakpoints="breakpoints"
       >
-        <!-- <Slide v-for="slide in 10" :key="slide"> -->
         <Slide v-for="item in items" :key="item.id" class="skill-slide">
-          <!-- <div class="carousel__item">{{ slide }}</div> -->
-          <!-- <div v-for="item in items" :key="item.id" class="skill-list-body"> -->
           <div class="image-container">
             <img :src="item.image" class="skill-icon" />
           </div>
@@ -21,14 +21,16 @@
             <p class="skill-year">{{ item.description }}</p>
             <p class="skill-year">{{ item.description2 }}</p>
           </div>
-          <!-- </div> -->
         </Slide>
 
         <template #addons>
           <Navigation />
         </template>
       </Carousel>
-      <p class="skill-date">最終更新日 : 2023/05/02</p>
+      <p class="skill-date" ref="element2">
+        <span v-if="textYear">最終更新日 : 2023/05/02</span>
+        <span v-if="isYear">{{ randomString }}</span>
+      </p>
     </div>
   </div>
 </template>
@@ -48,6 +50,11 @@ export default defineComponent({
   },
   data() {
     return {
+      randomString: "",
+      textTitle: false,
+      isTitle: false,
+      textYear: false,
+      isYear: false,
       breakpoints: {
         500: {
           itemsToShow: 1.9,
@@ -132,6 +139,69 @@ export default defineComponent({
         },
       ],
     };
+  },
+  mounted() {
+    const observer1 = new IntersectionObserver(
+      this.handleIntersection1.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer1.observe(this.$refs.element1);
+    const observer2 = new IntersectionObserver(
+      this.handleIntersection2.bind(this),
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1.0,
+      }
+    );
+    observer2.observe(this.$refs.element2);
+    setInterval(() => {
+      this.randomString = this.generateRandomString();
+    }, 90);
+  },
+  methods: {
+    generateRandomString() {
+      let length = 15;
+      let result = "";
+      let characters = "-010101";
+      let charactersLength = characters.length;
+      for (let i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
+    },
+    handleIntersection1(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.isTitle = true;
+          this.textTitle = false;
+          setTimeout(() => {
+            this.isTitle = false;
+            this.textTitle = true;
+          }, 700);
+        }
+      });
+    },
+    handleIntersection2(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.generateRandomString();
+          this.isYear = true;
+          this.textYear = false;
+          setTimeout(() => {
+            this.isYear = false;
+            this.textYear = true;
+          }, 700);
+        }
+      });
+    },
   },
 });
 </script>

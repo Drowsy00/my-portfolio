@@ -1,15 +1,18 @@
 <template>
   <h1 class="page-title">index</h1>
   <IndexComp />
-
-  <Skills />
-  <About />
-
+  <div class="page">
+    <Skills />
+  </div>
+  <div class="page">
+    <About />
+  </div>
+  <div class="page">
+    <Contact />
+  </div>
   <img
     src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
   />
-
-  <Contact />
 </template>
 
 <script>
@@ -32,7 +35,8 @@ export default {
 * {
   font-family: "Bruno Ace", sans-serif;
 }
-.aboutpage {
-  margin-top: 200%;
+
+.page {
+  margin-bottom: 100px;
 }
 </style>
